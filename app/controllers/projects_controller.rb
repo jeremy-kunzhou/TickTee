@@ -31,7 +31,10 @@ class ProjectsController < ApplicationController
         format.html { redirect_to @project, notice: 'Project has been created.' }
         format.json { render :show, status: :created, location: @project }
       else
-        format.html { render :new }
+        format.html { 
+          flash[:alert] = "Project has not been created."
+          render :new 
+        }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end

@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 feature 'Creating Projects' do
+  before do
+    visit "/"
+    click_link "New Project"
+  end
 	scenario "can create a project" do
-		visit '/'
-		click_link 'New Project'
 		fill_in 'Name', with: 'TextMate 2'
 		fill_in 'Description', with: 'A project notification on rails'
 		click_button 'Create Project'
@@ -18,8 +20,6 @@ feature 'Creating Projects' do
 	end
 	
 	scenario "cannot create a project without a name" do
-	  visit "/"
-	  click_link "Create Project"
 	  click_button "Create Project"
 	  
 	  expect(page).to have_content("Project has not been created.")
