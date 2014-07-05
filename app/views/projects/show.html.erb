@@ -1,0 +1,33 @@
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<p>
+  <strong>Start at:</strong>
+  <%= @project.start_at %>
+</p>
+
+<p>
+  <strong>End at:</strong>
+  <%= @project.end_at %>
+</p>
+
+<p>
+  <strong>Expected progress:</strong>
+  <%= @project.expected_progress %>
+</p>
+
+<p>
+  <strong>Current progress:</strong>
+  <%= @project.current_progress %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

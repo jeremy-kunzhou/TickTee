@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  commit: MyText
+  start: 2014-07-04
+  end: 2014-07-04
+  progress: 1
+  expected: 1
+  user_id: 
+
+two:
+  name: MyString
+  commit: MyText
+  start: 2014-07-04
+  end: 2014-07-04
+  progress: 1
+  expected: 1
+  user_id: 
