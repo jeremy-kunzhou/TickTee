@@ -6,23 +6,21 @@
 #
 default: &default
   adapter: postgresql
-  encoding: utf-8
-  username: myapp
-  password: paddword1
+  encoding: unicode
   pool: 5
-  timeout: 5000
 
-development:
-  <<: *default
-  database: db_development
+
+# development:
+#   <<: *default
+#   database: db_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: db_test
+# test:
+#   <<: *default
+#   database: db_test
 
-production:
-  <<: *default
-  database: db_production
+# production:
+#   <<: *default
+#   database: db_production
