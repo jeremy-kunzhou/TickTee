@@ -34,6 +34,11 @@
   <%= image_tag(@image_path, alt: "Progress Image") %>
 </p>
 
+<p>
+	<strong>Image Access Url:</strong>
+	<%= link_to generate_path(@project)+".jpg", generate_path(@project)+".jpg" %>
+</p>
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %> | 
 <%= link_to 'Generate', generate_path(@project)+".jpg", method: :get %>
