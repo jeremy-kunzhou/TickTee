@@ -7,10 +7,17 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% flash.each do |k, v|%>
-	<div class="flash" id='<%= k %>'><%= v %></div>
-<% end %>
-<%= yield %>
+	<header>
+		<% if user_signed_in? %>
+			Welcome, <%= current_user.email %> | <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+		<% else %>
+			<%= link_to "Sign In", new_user_session_path %>
+		<% end %>
+		<% flash.each do |k, v|%>
+			<div class="flash" id='<%= k %>'><%= v %></div>
+		<% end %>
+	</header>
+	<%= yield %>
 
 </body>
 </html>

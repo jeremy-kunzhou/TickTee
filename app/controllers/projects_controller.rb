@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :generate]
-
+  before_action :authenticate_user!, except: :generate
   # GET /projects
   # GET /projects.json
   def index

@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   include ImageGeneration
   include AnyBase
   validates :name, presence: {message: "Name cannot be blank."}
+  validates :start_at, :end_at, :expected_progress, :current_progress, presence: true;
   
   def self.generate_image(project_id, format)
     project = Project.find(project_id)

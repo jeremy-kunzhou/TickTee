@@ -8,6 +8,11 @@ feature "Creating Projects" do
 	scenario "can create a project" do
 		fill_in 'Name', with: 'TextMate 2'
 		fill_in 'Description', with: 'A project notification on rails'
+    select "2014", from: "project[start_at(1i)]"
+    select "June", from: "project[start_at(2i)]"
+    select "17", from: "project[start_at(3i)]"
+    fill_in 'Expected progress', with: '0'
+    fill_in 'Current progress', with: '10'
 		click_button 'Create Project'
 		
 		expect(page).to have_content('Project has been created.')
@@ -24,5 +29,13 @@ feature "Creating Projects" do
 	  
 	  expect(page).to have_content("Project has not been created.")
 	  expect(page).to have_content("Name cannot be blank.")
+	end
+  
+	scenario "cannot create a project without current progress" do
+	  click_button "Create Project"
+		fill_in 'Name', with: 'TextMate 2'
+		fill_in 'Description', with: 'A project notification on rails'
+	  expect(page).to have_content("Project has not been created.")
+	  expect(page).to have_content("Current progress can't be blank")
 	end
 end
