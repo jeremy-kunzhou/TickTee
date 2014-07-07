@@ -88,6 +88,9 @@ class ProjectsController < ApplicationController
       public_path = Rails.public_path.to_s
       path = public_path << "/progress/#{@project.name}.jpg"
       @img_path = path if File.exists? path
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Resource requested don't exist"
+      redirect_to "/"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
