@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   root 'welcome#index'
-  get 'projects/:id/generate' => 'projects#generate', as: :generate
+  get 'users/:user_id/projects/:id/generate' => 'projects#generate', as: :generate
   resources :users do
     resources :projects
   end
