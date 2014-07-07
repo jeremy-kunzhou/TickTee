@@ -36,10 +36,10 @@
 
 <p>
 	<strong>Image Access Url:</strong>
-	<%= link_to user_url(current_user)+generate_path(@project)+".jpg", user_url(current_user)+generate_path(@project)+".jpg"%>
+	<%= link_to generate_url(current_user, @project)+".jpg", generate_url(current_user, @project)+".jpg"%>
 </p>
 
 <%= link_to 'Edit', [:edit, current_user, @project] %> |
 <%= link_to 'Destory',  [current_user, @project], method: :delete, data: {confirm: "Do you really want to destory this project?"} %> |
 <%= link_to 'Back', user_projects_path(current_user) %> | 
-<%= link_to 'Generate', user_url(current_user)+generate_path(@project)+".jpg", method: :get %>
+<%= link_to 'Generate', generate_url(current_user, @project)+".jpg", method: :get %>
