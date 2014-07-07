@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
 
-  if Rails.env.production?
-    devise_for :users, controllers: {registrations: "registrations"}
-  else
+  # if Rails.env.production?
+  #   devise_for :users, controllers: {registrations: "registrations"}
+  # else
     devise_for :users
-  end
+  # end
 
   root 'welcome#index'
   get 'projects/:id/generate' => 'projects#generate', as: :generate
