@@ -1,8 +1,10 @@
 <h1>Listing projects</h1>
 <ul>
-	<% @projects.each do |project| %>
-		<li><%= link_to project.name, project %></li>
-	<% end%>
+
+		<% current_user.projects.each do |project| %>
+			<li><%= link_to project.name, user_project_path(current_user, project) %></li>
+		<% end %>
+
 </ul>
 
 <!-- <table>
@@ -19,7 +21,7 @@
   </thead>
 
   <tbody>
-    <% @projects.each do |project| %>
+    <% current_user.projects.each do |project| %>
       <tr>
         <td><%= project.name %></td>
         <td><%= project.description %></td>
@@ -27,9 +29,9 @@
         <td><%= project.end_at %></td>
         <td><%= project.expected_progress %></td>
         <td><%= project.current_progress %></td>
-        <td><%= link_to 'Show', project_path(project), method: :get, data: {confirm: "Show this project?"} %></td>
-        <td><%= link_to 'Edit', edit_project_path(project), data: {confirm: "Edit this project?"} %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user_projects_path(current_user, project), method: :get, data: {confirm: "Show this project?"} %></td>
+        <td><%= link_to 'Edit', [:edit, current_user, project], data: {confirm: "Edit this project?"} %></td>
+        <td><%= link_to 'Destroy', [current_user, project], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -37,4 +39,4 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'Create Project', new_user_project_path(current_user) %>

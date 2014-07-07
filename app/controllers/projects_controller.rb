@@ -4,7 +4,6 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
   end
 
   # GET /projects/1
@@ -17,7 +16,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @project = current_user.projects.build
   end
 
   # GET /projects/1/edit
@@ -27,16 +26,16 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
     respond_to do |format|
       if @project.save
         generate_img
-        format.html { redirect_to @project, notice: 'Project has been created.' }
-        format.json { render :show, status: :created, location: @project }
+        format.html { redirect_to [current_user, @project], notice: 'Project has been created.' }
+        format.json { render :show, status: :created, location: [current_user, @project] }
       else
         format.html { 
           flash[:alert] = "Project has not been created."
-          render :new 
+          render :new
         }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
@@ -49,8 +48,8 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update(project_params)     
         generate_img   
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { render :show, status: :ok, location: @project }
+        format.html { redirect_to [current_user, @project], notice: 'Project was successfully updated.' }
+        format.json { render :show, status: :ok, location: [current_user, @project] }
       else
         format.html { render :edit }
         format.json { render json: @project.errors, status: :unprocessable_entity }
@@ -63,7 +62,12 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { 
+        if @img_path
+          File.delete(@img_path) if File.exist? @img_path
+        end
+        redirect_to user_projects_url(current_user), notice: 'Project was successfully destroyed.' 
+      }
       format.json { head :no_content }
     end
   end
@@ -84,7 +88,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = current_user.projects.find(params[:id])
       public_path = Rails.public_path.to_s
       path = public_path << "/progress/#{@project.name}.jpg"
       @img_path = path if File.exists? path
@@ -103,6 +107,6 @@ class ProjectsController < ApplicationController
       @project.is_updated = false;
       @project.save
       kit = Project.generate_image(@project.id, "jpg")
-      kit 
+      kit
     end
 end

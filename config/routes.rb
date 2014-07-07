@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :projects
-
   get 'welcome/index'
 
   if Rails.env.production?
@@ -12,7 +10,9 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get 'projects/:id/generate' => 'projects#generate', as: :generate
-  
+  resources :users do
+    resources :projects
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

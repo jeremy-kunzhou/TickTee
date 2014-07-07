@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
   include AnyBase
   validates :name, presence: {message: "Name cannot be blank."}
   validates :start_at, :end_at, :expected_progress, :current_progress, presence: true;
-
+  belongs_to :user
   def self.generate_image(project_id, format)
     project = Project.find(project_id)
     url = Rails.root.join('public', 'progress', project.name + '.' + format).to_s

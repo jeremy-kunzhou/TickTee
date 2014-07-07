@@ -1,3 +1,5 @@
 <h1>Welcome</h1>
 <p>This is a little project for traking personal project while suffering internet</p>
-<%= link_to 'My Project', projects_path %>
+<% if user_signed_in? %>
+	<%= link_to "My Project", user_projects_path(current_user)%>
+<% end %>

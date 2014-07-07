@@ -4,7 +4,6 @@ module ApplicationHelper
       content_for :title do
         (parts << "TickTee").join(" - ")
       end
-      p @titlet
     end
   end
 end
