@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :generate]
   before_action :authenticate_user!, except: :generate
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  
   # GET /projects
   # GET /projects.json
   def index
@@ -74,15 +75,28 @@ class ProjectsController < ApplicationController
   
   # GET /projects/1/generate
   def generate
-    diff_date = @project.generate_at - Time.now.to_date
-    if @img_path && !@project.is_updated && diff_date == 0
-      File.open(@img_path, 'rb') do |f|
+    begin
+      @project = User.find(params[:user_id]).projects.find(params[:id])   
+      public_path = Rails.public_path.to_s
+      path = public_path << "/progress/#{@project.name}.jpg"
+      @img_path = path if File.exists? path
+      diff_date = @project.generate_at - Time.now.to_date
+      if @img_path && !@project.is_updated && diff_date == 0
+        File.open(@img_path, 'rb') do |f|
+          send_data f.read, type: "image/jpeg", disposition: "inline"
+        end
+      else
+        kit = generate_img
+        send_data kit.to_jpg, type: "image/jpeg", disposition: "inline"
+      end 
+    rescue ActiveRecord::RecordNotFound
+      public_path = Rails.public_path.to_s
+      path = public_path << "/imageNotFound.jpg"
+      File.open(path, 'rb') do |f|
         send_data f.read, type: "image/jpeg", disposition: "inline"
       end
-    else
-      kit = generate_img
-      send_data kit.to_jpg, type: "image/jpeg", disposition: "inline"
-    end 
+    end
+    
   end
 
   private
