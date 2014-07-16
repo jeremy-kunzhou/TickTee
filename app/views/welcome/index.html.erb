@@ -46,10 +46,28 @@
 	</div>
 		<script>
 		$(document).ready(function(){
+			var $window = $(window)
+			var welcomeFontSize = 50;
+			var infoFontSize = 20;
+			var windowSize = $window.width();
+			
+			var welcomeAnimate = function(){
+				if (windowSize < 768)
+				{
+					welcomeFontSize = 25+ (welcomeFontSize-25) * windowSize / 768
+					infoFontSize = 15+ (infoFontSize-15) * windowSize / 768					
+				}
+				
+				$('.info_graph').css(
+					{
+						'font-size': ''+infoFontSize+'px',
+					}
+				)
+				
 			$('#welcome_1').animate(
 				{
 					left: '20%',
-					'font-size': '50px',
+					'font-size': ''+welcomeFontSize+'px',
 					opacity: '1',
 				}, 
 				function(){
@@ -60,7 +78,7 @@
 						{
 							left: '22%',
 							top: '100px',
-							'font-size': '40px',
+							'font-size': ''+welcomeFontSize*0.8+'px',
 							opacity: '1',
 						},
 						function(){
@@ -68,7 +86,7 @@
 								{
 									left: '25%',
 									top:'150',
-									'font-size': '50px',
+									'font-size': ''+welcomeFontSize+'px',
 									opacity: '1',
 								}
 							)
@@ -84,6 +102,8 @@
 			
 				}
 			)
+		}
+		welcomeAnimate();
 	
 		})
 		</script>
