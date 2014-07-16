@@ -1,0 +1,13 @@
+<div>
+<p>Listing projects</p>
+<ul>
+
+		<% current_user.projects.each do |project| %>
+			<li><%= link_to project.name, user_project_path(current_user, project) %></li>
+		<% end %>
+
+</ul>
+<br>
+
+<%= link_to 'Create Project', new_user_project_path(current_user) %>
+</div>

@@ -22,5 +22,8 @@ module Ticketee
     
     # ==> Add For Heroku
     # config.assets.initialize_on_precompile = false
+    
+    # ==> Auto load path
+    config.autoload_paths << Rails.root.join("app", 'models','util')
   end
 end

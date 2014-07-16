@@ -1,0 +1,38 @@
+<% content_for :content do %>
+  		<div class="col-sm-3 col-md-2 sidebar" style="border: 1px solid #EEE; border-radius:5px; margin-left: 5px; bottom: auto;min-height: 300px;">
+  			<ul class="nav nav-sidebar">
+  				<li class="active"><a href="#">Overview</a></li>
+  				<li><span class="icon-bar"></span></li>
+  				<li><p class="text-center" style="margin-top: 10px">Project list</p></li>
+  				<div id="users">
+  					<li style="padding: 5px"><input class="search text-center" style="width: 100%; margin: auto;" placeholder="Search" /></li>
+		  					<ul class="list nav nav-embeded-nav-list">	
+									<% current_user.projects.each do |project| %>
+										<% if project.id %>
+										<% if @project && @project.id == project.id %>
+											<li class="active">
+										<% else %>
+											<li>
+										<% end %>
+				  					<%= link_to project.name, user_project_path(current_user, project), {class: "name"} %></li>
+										<% end %>
+									<% end %>
+	  			  		</ul>
+  				</div>
+  			</ul>
+  		</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<%= content_for?(:main)? yield(:main) : yield %>
+			</div>
+			<div class="clearfix visible-xs-block"></div>
+		<script>
+		var options, userList;
+
+		  options = {
+		    valueNames: ['name', 'born']
+		  };
+
+		  userList = new List('users', options);
+		</script
+<% end %>
+<%= render template: "layouts/application" %>

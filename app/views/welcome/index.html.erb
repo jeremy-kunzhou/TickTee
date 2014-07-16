@@ -1,5 +1,90 @@
-<h1>Welcome</h1>
-<p>This is a little project for traking personal project while suffering internet</p>
-<% if user_signed_in? %>
-	<%= link_to "My Project", user_projects_path(current_user)%>
+<% content_for :content do %>
+<div class="row welcome">
+  <div id="welcome_1">
+  	<p>Welcome</p>
+  		</div>
+  		<div id="welcome_2">
+  			<p>To the <span>fancy</span> way for</p>
+  		</div>
+  		<div id="welcome_3">
+  			<p>Tracking your progress</p>
+  		</div>
+  	</div>
+
+		<div class="container">
+			<div id="information">
+				<div  class="row">
+			<div class="info info-top">
+				<div class="col-sm-6 col-md-6">
+					<div class="info_graph info_graph_left_top">
+			  			<p class="text-center" >input your progress simply</p>
+			  		</div>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<div class="info_graph info_graph_right_top">
+			  			<p class="text-center" >generate progress bar stylish</p>
+			  		</div>
+				</div>					
+			</div>
+				</div>
+				<div class="row">
+			<div class="info info-down">
+				<div class="col-sm-6 col-md-6">
+					<div class="info_graph info_graph_left_bottom">
+		  				<p class="text-center" >paste the url freely</p>
+		  			</div>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<div class="info_graph info_graph_right_bottom">
+		  				<p class="text-center" >track your progress clearly</p>
+		  			</div>
+				</div>
+			</div>
+				</div>		  		
+			</div>  	
+		</div>
+	</div>
+		<script>
+		$(document).ready(function(){
+			$('#welcome_1').animate(
+				{
+					left: '20%',
+					'font-size': '50px',
+					opacity: '1',
+				}, 
+				function(){
+					$('#welcome_2 span').animate({
+						color: 'red'
+					})
+					$('#welcome_2').animate(
+						{
+							left: '22%',
+							top: '100px',
+							'font-size': '40px',
+							opacity: '1',
+						},
+						function(){
+							$('#welcome_3').animate(
+								{
+									left: '25%',
+									top:'150',
+									'font-size': '50px',
+									opacity: '1',
+								}
+							)
+					
+							$('#information').animate(
+								{
+									opacity: '1',
+								}
+							)
+						}
+					)
+			
+			
+				}
+			)
+	
+		})
+		</script>
 <% end %>

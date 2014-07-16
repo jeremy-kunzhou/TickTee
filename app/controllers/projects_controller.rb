@@ -120,7 +120,7 @@ class ProjectsController < ApplicationController
       @project.generate_at = Time.now.to_date
       @project.is_updated = false;
       @project.save
-      kit = Project.generate_image(@project.id, "jpg")
+      kit = @project.generate_image("jpg")
       kit
     end
 end

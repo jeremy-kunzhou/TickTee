@@ -1,3 +1,51 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.welcome {
+	height:180px;
+}
+
+.welcome > div {
+	position:absolute; 
+	opacity: 0;
+}
+
+#information {
+	padding: 30px;
+	opacity: 0;
+}
+
+.info {
+/*	height: 100px;*/
+}
+
+.info-top{
+/*		background-color: yellow;*/
+}
+
+.info-down{
+/*		background-color: red;*/
+		margin-top: 5px;
+}
+
+.info_graph{
+	border: 3px solid #eee;
+	border-radius: 4px;
+	height:100px;
+	margin-top: 5px;
+	font-size: 20px; 
+	line-height: 100px; 
+}
+
+.info_graph_left_top{
+	border-left: 5px solid #2961EE;
+}
+.info_graph_right_top{
+	border-right: 5px solid #EE2989;
+}
+.info_graph_left_bottom{
+	border-left: 5px solid #FCAE1B;
+}
+.info_graph_right_bottom{
+	border-right: 5px solid #11E24F;
+}
