@@ -27,12 +27,12 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-						<%= link_to "Ticktee", "http://0.0.0.0:3000", {class: "navbar-brand"}%>
+						<%= link_to "Ticktee", root_path, {class: "navbar-brand"}%>
 	        </div>
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 							<% if user_signed_in? %>
-								<li><a href="<%= user_projects_path(current_user) %>"><img height="20" width="20" src="/assets/placeholder1.jpg" alt="..."> <%= current_user.email %></a></li>
+								<li><a href="<%= user_projects_path(current_user) %>"><img height="20" width="20" src="/placeholder1.jpg" alt="..."> <%= current_user.email %></a></li>
 								<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 							<% else %>
 								<li><%= link_to "Sign In", new_user_session_path %></li>
