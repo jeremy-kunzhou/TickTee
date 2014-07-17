@@ -21,15 +21,7 @@
   width: 100%;
   text-align: center;
 	margin: 0 auto;
-	height: 30px;
 	z-index: 9999;
+	opacity: 0.8;
 }
 
-.flash > p{
-	width: 200px;
-	height: 30px;
-	border: 2px solid #eee;
-	line-height: 30px;
-	margin: auto;
-	background-color: #aaa;
-}

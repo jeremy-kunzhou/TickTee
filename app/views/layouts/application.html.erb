@@ -49,9 +49,18 @@
 			</div>  	
 	</header>
 	<% flash.each do |k, v|%>
-			<div style="">
-			<div class="flash" id='<%= k %>'>
-				<p><%= v %></p></div>
+		<% if k == :notice.to_s %>
+			<% alertType = "success" %>
+		<% else %>
+			<% alertType = "danger" %>
+		<% end %>
+		<div class="flash" id='<%= k %>'>
+			<div class="alert alert-<%= alertType%>" role="alert" style="width: 50%; margin: 0 auto;">		
+				<button type="botton" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<strong><%= v %></strong>
 			</div>
 		</div>
 	<% end %>
