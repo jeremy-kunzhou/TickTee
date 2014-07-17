@@ -1,54 +1,55 @@
 <% content_for :content do %>
-<div class="row welcome">
-  <div id="welcome_1">
-  	<p>Welcome</p>
-  		</div>
-  		<div id="welcome_2">
-  			<p>To the <span>fancy</span> way for</p>
-  		</div>
-  		<div id="welcome_3">
-  			<p>Tracking your progress</p>
-  		</div>
-  	</div>
-
-			<div id="information">
-				<div  class="row">
+<div class="welcome">
+	<div class="row">
+	  <div id="welcome_1">
+	  	<p>Welcome</p>
+	  </div>
+	  <div id="welcome_2">
+	  	<p>To the <span>fancy</span> way for</p>
+	  </div>
+	  <div id="welcome_3">
+	  	<p>Tracking your progress</p>
+	  </div>
+	</div>
+</div>
+<div id="information">
+	<div id="container">
+		<div  class="row">
 			<div class="info info-top">
 				<div class="col-sm-6 col-md-6">
 					<div class="info_graph info_graph_left_top">						
-			  			<p class="text-center" >input your progress simply</p>
-							<div class="arrow"></div>
-			  		</div>
+				  	<p class="text-center" >input your progress simply</p>
+						<div class="arrow"></div>
+				  </div>
 				</div>
 				<div class="col-sm-6 col-md-6">
 					<div class="info_graph info_graph_right_top">
-			  			<p class="text-center" >generate progress bar stylish</p>
-			<div class="arrow"></div>
-			  		</div>
+				  	<p class="text-center" >generate progress bar stylish</p>
+						<div class="arrow"></div>
+				  </div>
 				</div>					
 			</div>
-				</div>
-				<div class="row">
+		</div>
+		<div class="row">
 			<div class="info info-down">
 				<div class="col-sm-6 col-md-6">
 					<div class="info_graph info_graph_left_bottom">
-								<div class="arrow"></div>
-		  				<p class="text-center" >paste the url freely</p>
-
-		  			</div>
+						<div class="arrow"></div>
+			  		<p class="text-center" >paste the url freely</p>
+					</div>
 				</div>
 				<div class="col-sm-6 col-md-6">
 					<div class="info_graph info_graph_right_bottom">
-								<div class="arrow"></div>
-		  				<p class="text-center" >track your progress clearly</p>
-
-		  			</div>
+							<div class="arrow"></div>
+			  			<p class="text-center" >track your progress clearly</p>
+						</div>
+					</div>
 				</div>
-			</div>
-				</div>		  		
+			</div>		  		
 		</div>
 	</div>
-		<script>
+</div>
+<script>
 		$(document).ready(function(){
 			var $window = $(window)
 			var welcomFontMaxSize = 50;
@@ -65,7 +66,9 @@
 					welcomeFontSize = welcomFontMinSize+ (welcomFontMaxSize-welcomFontMinSize) * windowSize / 768
 					infoFontSize = infoFontMinSize+ (infoFontMaxSize-infoFontMinSize) * windowSize / 768	
 					$('.info_graph_right_bottom').parent().insertBefore($('.info_graph_left_bottom:parent').parent())
-									
+					$('#information').css({
+						width: '90%'
+					})			
 				}
 				else
 				{
@@ -73,7 +76,9 @@
 					infoFontSize = 20;
 						
 					$('.info_graph_left_bottom').parent().insertBefore($('.info_graph_right_bottom:parent').parent())
-					
+						$('#information').css({
+							width: '720px'
+						})
 				}
 			}
 			
@@ -152,5 +157,5 @@
 		$(window).resize(updateUI)
 		
 		})
-		</script>
+</script>
 <% end %>

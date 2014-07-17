@@ -5,12 +5,14 @@
 	height:180px;
 }
 
-.welcome > div {
+.welcome > div > div {
 	position:absolute; 
 	opacity: 0;
 }
 
 #information {
+	width: 720px;
+	margin: 0 auto;
 	padding: 30px;
 	opacity: 0;
 }
