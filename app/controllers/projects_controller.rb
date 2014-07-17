@@ -98,6 +98,26 @@ class ProjectsController < ApplicationController
     end
     
   end
+  
+  # POST /projects/1/generate
+  def generate_post
+    begin
+      @project = User.find(params[:user_id]).projects.find(params[:id])   
+      public_path = Rails.public_path.to_s
+      path = public_path << "/progress/#{@project.name}.jpg"
+      @img_path = path if File.exists? path
+      diff_date = @project.generate_at - Time.now.to_date
+      unless @img_path && !@project.is_updated && diff_date == 0      
+        generate_img
+      end 
+      flash[:notice] = "Generate Successfully!"
+      redirect_to user_project_path(current_user, @project)
+    rescue ActiveRecord::RecordNotFound
+      flash[:alert] = "Project not found!"
+      redirect_to user_project_path(current_user, @project)
+    end
+    
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -120,7 +140,6 @@ class ProjectsController < ApplicationController
       @project.generate_at = Time.now.to_date
       @project.is_updated = false;
       @project.save
-      kit = @project.generate_image("jpg")
-      kit
+      @project.generate_image("jpg")
     end
 end

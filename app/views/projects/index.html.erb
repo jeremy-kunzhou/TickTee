@@ -1,9 +1,8 @@
-<div class="col-md-4">
+<div class="col-md-4 col-md-offset-2">
 <%= render 'list'%>
 </div>
-
-<div class="col-md-8">
-	
+<div style="margin-top: 10px">
+<%= link_to 'Create Project', new_user_project_path(current_user), {class: "btn btn-default btn-xs", role: "button"} %>
 </div>
 
 

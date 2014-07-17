@@ -21,11 +21,11 @@
   </div>
   <div class="form-group">
     <%= f.label :start_at %>
-    <%= f.date_select :start_at, {class: "form-control"} %>
+    <%= f.text_field :start_at, {class: "form-control datepicker"} %>
   </div>
   <div class="form-group">
     <%= f.label :end_at %>
-    <%= f.date_select :end_at, {class: "form-control"} %>
+    <%= f.text_field :end_at, {class: "form-control datepicker"} %>
   </div>
   <div class="form-group">
     <%= f.label :expected_progress %>
@@ -39,3 +39,6 @@
     <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>
+<script>
+$('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+</script>

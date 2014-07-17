@@ -30,19 +30,19 @@
 </p>
 
 <p>
-  <strong>Progress Image:</strong>
+  <strong>Progress Image:</strong><br>
   <%= image_tag(@image_path, alt: "Progress Image") %>
 </p>
 
 <p>
-	<strong>Image Access Url:</strong>
+	<strong>Image Access Url:</strong><br>
 	<%= link_to generate_url(current_user, @project)+".jpg", generate_url(current_user, @project)+".jpg"%>
 </p>
 
-<div class="btn-group" style="margin-top: 5px">
+<div class="btn-group" style="margin-top: 10px">
 <%= link_to 'Edit', [:edit, current_user, @project] , {class: "btn btn-default btn-xs", role: "button"} %>
 <%= link_to 'Destory',  [current_user, @project], {method: :delete, class: "btn btn-default btn-xs", role: "button", data: {confirm: "Do you really want to destory this project?"}}  %>
 <%= link_to 'Back', user_projects_path(current_user), {class: "btn btn-default btn-xs", role: "button"}  %>
-<%= link_to 'Generate', generate_url(current_user, @project)+".jpg",  {class: "btn btn-default btn-xs", role: "button",   method: :get} %>
+<%= link_to 'Generate', generate_url(current_user, @project)+".jpg",  {class: "btn btn-default btn-xs", role: "button",   method: :post} %>
 
 </div>

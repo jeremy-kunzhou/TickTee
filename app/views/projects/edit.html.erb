@@ -3,7 +3,7 @@
 <%= render 'form' %>
 
 
-<div class="btn-group" style="margin-top: 5px">
+<div style="margin-top: 10px" class="btn-group">
 <%= link_to 'Show', [current_user, @project] , {class: "btn btn-default btn-xs", role: "button"} %>
 <%= link_to 'Back', user_projects_path(current_user) , {class: "btn btn-default btn-xs", role: "button"} %>
 </div>

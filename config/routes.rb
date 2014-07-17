@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
   get 'users/:user_id/projects/:id/generate' => 'projects#generate', as: :generate
+  post 'users/:user_id/projects/:id/generate' => 'projects#generate_post', as: :generate_post
   resources :users do
     resources :projects
   end

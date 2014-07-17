@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.min
 //= require turbolinks
 //= require bootstrap.min
 //= require ie-emulation-modes-warning
