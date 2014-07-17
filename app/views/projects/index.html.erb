@@ -1,38 +1,8 @@
-<div class="col-md-4 col-md-offset-2">
-<%= render 'list'%>
+<div class="col-md-10 col-md-offset-2">
+	<%= render 'list'%>
+	<div style="margin-top: 10px">
+		<%= link_to 'Create Project', new_user_project_path(current_user), {class: "btn btn-primary", role: "button"} %>
+	</div>
 </div>
-<div style="margin-top: 10px">
-<%= link_to 'Create Project', new_user_project_path(current_user), {class: "btn btn-default btn-xs", role: "button"} %>
-</div>
 
-
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Start at</th>
-      <th>End at</th>
-      <th>Expected progress</th>
-      <th>Current progress</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% current_user.projects.each do |project| %>
-      <tr>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td><%= project.start_at %></td>
-        <td><%= project.end_at %></td>
-        <td><%= project.expected_progress %></td>
-        <td><%= project.current_progress %></td>
-        <td><%= link_to 'Show', user_projects_path(current_user, project), method: :get, data: {confirm: "Show this project?"} %></td>
-        <td><%= link_to 'Edit', [:edit, current_user, project], data: {confirm: "Edit this project?"} %></td>
-        <td><%= link_to 'Destroy', [current_user, project], method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table> -->
 
