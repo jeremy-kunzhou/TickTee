@@ -32,7 +32,7 @@
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav navbar-right">
 							<% if user_signed_in? %>
-								<li><a href="<%= user_projects_path(current_user) %>"><img height="20" width="20" src="/placeholder1.jpg" alt="..."> <%= current_user.email %></a></li>
+								<li><a href="<%= edit_user_registration_path %>"><img height="20" width="20" src="/placeholder1.jpg" alt="..."> <%= current_user.email %></a></li>
 								<li><%= link_to "My Projects", user_projects_path(current_user) %></li>
 								<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
 							<% else %>
