@@ -10,9 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    if @img_path
-      @image_path = "/progress/#{@project.name}.jpg"
-    end
+    @image_path = "/progress/#{@project.name}.jpg?#{'%.6f' % Time.new.to_f}" if @img_path   
   end
 
   # GET /projects/new
