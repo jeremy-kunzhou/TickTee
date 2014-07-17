@@ -51,12 +51,21 @@
 			var infoFontSize = 20;
 			var windowSize = $window.width();
 			
-			var welcomeAnimate = function(){
+			var changeFontSize = function (){
 				if (windowSize < 768)
 				{
 					welcomeFontSize = 20+ (welcomeFontSize-20) * windowSize / 768
 					infoFontSize = 13+ (infoFontSize-13) * windowSize / 768					
 				}
+				else
+				{
+					welcomeFontSize = 50;
+					infoFontSize = 20;
+				}
+			}
+			
+			var welcomeAnimate = function(){
+				changeFontSize()
 				
 				$('.info_graph').css(
 					{
@@ -103,8 +112,31 @@
 				}
 			)
 		}
+		
+		var updateUI = function() {
+				windowSize = $window.width();
+				changeFontSize()
+				$('.info_graph').css(
+					{
+						'font-size': ''+infoFontSize+'px',
+					}
+				)
+				$('#welcome_1').css({
+					'font-size': ''+welcomeFontSize+'px'
+				})
+				$('#welcome_2').css({
+					'font-size': ''+welcomeFontSize*0.8+'px'
+				})
+				$('#welcome_3').css({
+					'font-size': ''+welcomeFontSize+'px'
+				})
+				
+		}
+		
 		welcomeAnimate();
-	
+		
+		$(window).resize(updateUI)
+		
 		})
 		</script>
 <% end %>
