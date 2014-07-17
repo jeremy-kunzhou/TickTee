@@ -32,20 +32,94 @@
 	border: 3px solid #eee;
 	border-radius: 4px;
 	height:100px;
-	margin-top: 5px;
+	margin-top: 10px;
 	font-size: 20px; 
 	line-height: 100px; 
 }
 
 .info_graph_left_top{
-	border-left: 5px solid #2961EE;
+	border-right: 5px solid #2961EE;
 }
 .info_graph_right_top{
-	border-right: 5px solid #EE2989;
+	border-bottom: 5px solid #EE2989;
 }
 .info_graph_left_bottom{
-	border-left: 5px solid #FCAE1B;
+	border-top: 5px solid #FCAE1B;
 }
 .info_graph_right_bottom{
-	border-right: 5px solid #11E24F;
+	border-left: 5px solid #11E24F;
+}
+
+.arrow{
+	position: absolute;
+	display: inline-block;
+	width: 0;
+	height:0;
+	border: 11px solid transparent;
+	background-color: transparent;
+}
+
+.info_graph_left_top > .arrow{
+	border-left: 11px solid #2961EE;
+	top: 45%;
+	right: -5px;
+}
+
+.info_graph_right_top > .arrow{
+	border-top: 11px solid #EE2989;
+	left: 45%;
+	bottom: -20px;
+}
+
+.info_graph_right_bottom > .arrow{
+	border-right: 11px solid #11E24F;
+	top: 45%;
+	left: -5px;
+}
+
+.info_graph_left_bottom > .arrow{
+	border-bottom: 11px solid #FCAE1B;
+	left: 45%;
+	top: -10px;
+}
+
+@media (max-width: 767px) {
+	.info_graph_left_top{
+		border-right: 3px solid #eee;
+		border-bottom: 5px solid #2961EE;
+	}
+	.info_graph_left_bottom{
+		border-top: 3px solid #eee;
+		border-bottom: 5px solid #FCAE1B;
+	}
+	.info_graph_right_bottom{
+		border-left: 3px solid #eee;
+		border-bottom: 5px solid #11E24F;
+	}
+
+	.info_graph_left_top > .arrow{
+		border: 11px solid transparent;
+		border-top: 11px solid #2961EE;
+		left: 45%;
+		top: 100px;
+	}
+
+	.info_graph_right_top > .arrow{
+		border: 11px solid transparent;
+		border-top: 11px solid #EE2989;
+		left: 45%;
+		bottom: -20px;
+	}
+
+	.info_graph_right_bottom > .arrow{
+		border: 11px solid transparent;
+		border-top: 11px solid #11E24F;
+		left: 45%;
+		top: 100px;
+	}
+
+	.info_graph_left_bottom > .arrow{
+		border: 11px solid transparent;
+	}
+
 }
