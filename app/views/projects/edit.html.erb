@@ -2,5 +2,8 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', [current_user, @project] %> |
-<%= link_to 'Back', user_projects_path(current_user) %>
+
+<div class="btn-group" style="margin-top: 5px">
+<%= link_to 'Show', [current_user, @project] , {class: "btn btn-default btn-xs", role: "button"} %>
+<%= link_to 'Back', user_projects_path(current_user) , {class: "btn btn-default btn-xs", role: "button"} %>
+</div>

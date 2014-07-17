@@ -21,8 +21,10 @@
   				</div>
   			</ul>
   		</div>
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<%= content_for?(:main)? yield(:main) : yield %>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+				<div class="main">
+					<%= content_for?(:main)? yield(:main) : yield %>
+				</div>
 			</div>
 			<div class="clearfix visible-xs-block"></div>
 		<script>
