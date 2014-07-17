@@ -25,3 +25,15 @@
 	opacity: 0.8;
 }
 
+.devise-main {
+	width:100%;
+}
+
+@media (min-width: 768px) {
+	.devise-main {
+		width:60%;
+	}
+}
+
+
+
