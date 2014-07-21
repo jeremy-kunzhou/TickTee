@@ -21,4 +21,6 @@
 //= require respond.min
 //= require docs.min
 //= require list.min
+//= require zeroclipboard
 //= require_tree .
+

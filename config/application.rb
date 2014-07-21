@@ -25,5 +25,6 @@ module Ticketee
     
     # ==> Auto load path
     config.autoload_paths << Rails.root.join("app", 'models','util')
+    config.assets.paths << Rails.root.join("app", "assets", "flash")
   end
 end

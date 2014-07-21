@@ -39,6 +39,15 @@
 	<%= link_to generate_url(current_user, @project)+".jpg", generate_url(current_user, @project)+".jpg"%>
 </p>
 
+<p>
+	<strong>Auto update javascript</strong>
+	<p>please insert the following html code anywhere you would like to show your project progress before the end of &lt;body&gt; tag</p>
+	<textarea id="auto_js_textarea" class="form-control" rows="10">
+		
+	</textarea>
+	<p>Tips: You could use your own &lt;img&gt; tag with id named "ticktee_img" as container to load image instead of using given &lt;div&gt; tag</p>
+</p>
+
 <div class="btn-group" style="margin-top: 10px">
 <%= link_to 'Edit', [:edit, current_user, @project] , {class: "btn btn-default btn-xs", role: "button"} %>
 <%= link_to 'Destory',  [current_user, @project], {method: :delete, class: "btn btn-default btn-xs", role: "button", data: {confirm: "Do you really want to destory this project?"}}  %>
@@ -46,3 +55,20 @@
 <%= link_to 'Generate', generate_url(current_user, @project)+".jpg",  {class: "btn btn-default btn-xs", role: "button",   method: :post} %>
 
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var auto_insert_js = 	
+			"<div id = \"ticktee\"></div>\n"+
+			"<script type=\"text/javascript\">\n"+
+			"	(function(){\n"+
+			"		var ticktee_js = document.createElement('script'); ticktee_js.type = \"text/javascript\";\n"+
+			"		ticktee_js.src = '<%= generate_url(current_user, @project) %>.js';\n"+
+			"		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ticktee_js);\n"+
+			"	})()\n"+
+			"</sc"+"ript>\n";		
+		$('textarea').val(auto_insert_js)
+	});
+</script>
+
+

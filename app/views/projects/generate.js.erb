@@ -1,0 +1,24 @@
+$(document).ready(function(){
+	var image_original_url = '<%= root_url %>users/<%= params[:user_id] %>/projects/<%= params[:id] %>/generate.jpg?';
+	var updateUrl = function(){
+		var time = (new Date()).getTime()
+		return image_original_url+time
+	}
+	if($('#ticktee')&&false)
+	{
+		var refreshImage = function(){
+			var image_tag = '<img src=\"'+updateUrl()+'\" alt=\"image from ticktee\" />'
+			$('#ticktee').html(image_tag)
+		}
+		refreshImage()
+		setInterval(function(){refreshImage()}, 300*1000)
+	}
+	else if($('#ticktee_img'))
+	{
+		var refreshImage = function(){
+			$('#ticktee_img').attr('src', updateUrl())
+		}
+		refreshImage()
+		setInterval(function(){refreshImage()}, 300*1000)
+	}
+});

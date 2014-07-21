@@ -1,17 +1,26 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!, except: :generate
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
-  
+  before_action :authenticate_user!, except: [:generate]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :loadjs]
+  skip_before_filter :verify_authenticity_token, if: :js_request?
   # GET /projects
   # GET /projects.json
   def index
+  end
+  
+  def js_request?
+    params[:action] == "generate" && request.format.js?
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @image_path = "/progress/#{@project.name}.jpg?#{'%.6f' % Time.new.to_f}" if @img_path   
+    respond_to do |format|
+      format.html do
+        @image_path = "/progress/#{@project.name}.jpg?#{'%.6f' % Time.new.to_f}" if @img_path   
+      end
+    end
   end
+  
 
   # GET /projects/new
   def new
@@ -73,28 +82,32 @@ class ProjectsController < ApplicationController
   
   # GET /projects/1/generate
   def generate
-    begin
-      @project = User.find(params[:user_id]).projects.find(params[:id])   
-      public_path = Rails.public_path.to_s
-      path = public_path << "/progress/#{@project.name}.jpg"
-      @img_path = path if File.exists? path
-      diff_date = @project.generate_at - Time.now.to_date
-      if @img_path && !@project.is_updated && diff_date == 0
-        File.open(@img_path, 'rb') do |f|
-          send_data f.read, type: "image/jpeg", disposition: "inline"
+    respond_to do |format|
+      format.jpg do
+        begin
+          @project = User.find(params[:user_id]).projects.find(params[:id])   
+          public_path = Rails.public_path.to_s
+          path = public_path << "/progress/#{@project.name}.jpg"
+          @img_path = path if File.exists? path
+          diff_date = @project.generate_at - Time.now.to_date
+          if @img_path && !@project.is_updated && diff_date == 0
+            File.open(@img_path, 'rb') do |f|
+              send_data f.read, type: "image/jpeg", disposition: "inline"
+            end
+          else
+            kit = generate_img
+            send_data kit.to_jpg, type: "image/jpeg", disposition: "inline"
+          end 
+        rescue ActiveRecord::RecordNotFound
+          public_path = Rails.public_path.to_s
+          path = public_path << "/imageNotFound.jpg"
+          File.open(path, 'rb') do |f|
+            send_data f.read, type: "image/jpeg", disposition: "inline"
+          end
         end
-      else
-        kit = generate_img
-        send_data kit.to_jpg, type: "image/jpeg", disposition: "inline"
-      end 
-    rescue ActiveRecord::RecordNotFound
-      public_path = Rails.public_path.to_s
-      path = public_path << "/imageNotFound.jpg"
-      File.open(path, 'rb') do |f|
-        send_data f.read, type: "image/jpeg", disposition: "inline"
       end
+      format.js {render template: 'projects/generate'}
     end
-    
   end
   
   # POST /projects/1/generate
