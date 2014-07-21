@@ -31,7 +31,7 @@
 
 <p>
   <strong>Progress Image:</strong><br>
-  <%= image_tag(@image_path, alt: "Progress Image") %>
+  <%= image_tag "",alt: "Progress Image", id: "ticktee_img" %>
 </p>
 
 <p>
@@ -68,6 +68,21 @@
 			"	})()\n"+
 			"</sc"+"ript>\n";		
 		$('textarea').val(auto_insert_js)
+
+		var image_original_url = '<%= generate_url(current_user, @project) %>.jpg?';
+		var updateUrl = function(){
+			var time = (new Date()).getTime()
+			return image_original_url+time
+		}
+		if($('#ticktee_img'))
+		{
+			var refreshImage = function(){
+				$('#ticktee_img').attr('src', updateUrl())
+			}
+			refreshImage()
+			setInterval(function(){refreshImage()}, 300*1000)
+		}
+		
 	});
 </script>
 
