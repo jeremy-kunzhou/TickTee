@@ -1,5 +1,10 @@
 <p>Welcome <%= @email %>!</p>
 
+<p>This email is sent by system of Ticktee.</p>
+<p>DO NOT REPLY THIS EMAIL</p>
+<p>If any question, please contact our support.</p>
 <p>You can confirm your account email through the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token), {class: "btn btn-primary"} %></p>
+
+<p>Thank you very much for joining Ticktee. Enjoy it.</p>
