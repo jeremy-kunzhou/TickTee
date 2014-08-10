@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   if Rails.env.production?
     devise_for :users #, controllers: {registrations: "registrations"}
   else
-    devise_for :users
+    devise_for :users, controllers: {sessions: "sessions"}
   end
 
   root 'welcome#index'
@@ -13,6 +13,12 @@ Rails.application.routes.draw do
   post 'users/:user_id/projects/:id/generate' => 'projects#generate_post', as: :generate_post
   resources :users do
     resources :projects
+  end
+  
+  namespace :api do
+    namespace :v1 do
+      resources :projects
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
