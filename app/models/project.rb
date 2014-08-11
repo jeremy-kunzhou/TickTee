@@ -5,6 +5,9 @@ class Project < ActiveRecord::Base
   validates :start_at, :end_at, :expected_progress, :current_progress, presence: true;
   belongs_to :user
   def generate_image(format)
+    self.generate_at = Time.now.to_date
+    self.is_updated = false;
+    self.save
     url = Rails.root.join('public', 'progress', self.name + '.' + format).to_s
     diff_total = (self.end_at - self.start_at).to_f
     day_left = self.end_at - Time.now.to_date;

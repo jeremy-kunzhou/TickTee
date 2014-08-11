@@ -148,9 +148,6 @@ class ProjectsController < ApplicationController
     end
     
     def generate_img       
-      @project.generate_at = Time.now.to_date
-      @project.is_updated = false;
-      @project.save
       @project.generate_image("jpg")
     end
 end
