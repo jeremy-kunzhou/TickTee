@@ -65,7 +65,7 @@ describe "/api/v1/projects", type: :api do
       post "#{url}.json", {project: new_project}
       
       expect(last_response.status).to eq(401)
-      expect(last_response.body).to include("new_project[:name]")
+      expect(last_response.body).to include("error")
     end
   end
 end
