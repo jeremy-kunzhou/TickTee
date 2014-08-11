@@ -60,5 +60,12 @@ describe "/api/v1/projects", type: :api do
       expect(last_response.status).to eq(201)
       expect(last_response.body).to include(new_project[:name])
     end
+    
+    it "cannot create project without token" do
+      post "#{url}.json", {project: new_project}
+      
+      expect(last_response.status).to eq(401)
+      expect(last_response.body).to include("new_project[:name]")
+    end
   end
 end
