@@ -1,6 +1,6 @@
 class Api::V1::ProjectsController < Api::V1::BaseController
   
-  before_action :set_project, :only => [:update] 
+  before_action :set_project, :only => [:update, :destroy] 
   
   def index
     respond_with(current_user.projects)
@@ -24,6 +24,21 @@ class Api::V1::ProjectsController < Api::V1::BaseController
         format.json { render json: @project.to_json,  success: true, status: :created }
       else
         format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  def destroy
+    respond_to do |format|
+      if @project
+        public_path = Rails.public_path.to_s
+        path = public_path << "/progress/#{@project.name}.jpg"
+        img_path = path if File.exists? path
+        @project.destroy
+        File.delete(img_path) if File.exist? img_path if img_path
+        format.json { render json: @project.to_json, status: :ok, success: true}
+      else
+        format.json { render json: {message: "resource not found"}, status: :not_found}
       end
     end
   end

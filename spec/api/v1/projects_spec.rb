@@ -92,4 +92,30 @@ describe "/api/v1/projects", type: :api do
       expect(last_response.body).to include("error")
     end
   end
+  
+  context "projects delete" do 
+    let(:url) { "/api/v1/projects/#{project.id}"} 
+    it "delete project" do 
+      delete "#{url}.json", {}, headers
+      
+      expect(last_response.status).to eq(200)
+      json_body = JSON.parse(last_response.body)
+      expect(json_body).to have_key('name')
+      expect(json_body["name"]).to eq(project.name)
+    end
+    
+    it "cannot delete unexisted project" do 
+      delete "/api/v1/projects/111111111.json", {}, headers
+      
+      expect(last_response.status).to eq(404)
+      expect(last_response.body).to include("resource not found")
+    end
+    
+    it "cannot delete project without token" do 
+      delete "#{url}.json"
+      
+      expect(last_response.status).to eq(401)
+      expect(last_response.body).to include("error")
+    end
+  end
 end
