@@ -21,7 +21,7 @@ describe "/api/v1/projects", type: :api do
     user.confirm!
   end
   
-  context "projects view" do
+  context "project list view" do
     let(:url) { "/api/v1/projects"}
     it "projects viewable by this user" do
       get "#{url}.json", {}, headers
@@ -50,6 +50,38 @@ describe "/api/v1/projects", type: :api do
         p["name"] == "Others Project"
       end.should eql(false)
     end
+  end
+  
+  context "project view" do
+    let(:url) {"/api/v1/projects/#{project.id}"}
+    
+    it "view project which belongs to this user" do
+      get "#{url}.json", {}, headers
+      
+      expect(last_response.status).to eq(200)
+      expect(last_response.body).to include(project.to_json)
+    end
+    
+    it "cannot view project which does not exist" do
+      get "/api/v1/projects/1111111.json", {}, headers
+      
+      expect(last_response.status).to eq(404)
+      expect(last_response.body).to include("resource not found")
+    end
+    
+    it "cannot view project which belongs to other user" do
+      get "/api/v1/projects/#{project_other.id}.json", {}, headers
+      
+      expect(last_response.status).to eq(404)
+      expect(last_response.body).to include("resource not found")
+    end
+    
+    it "cannot view project without token" do
+      get "/api/v1/projects/#{project.id}.json"
+      
+      expect(last_response.status).to eq(401)
+      expect(last_response.body).to include("error")
+    end    
   end
   
   context "projects create" do 
@@ -85,6 +117,16 @@ describe "/api/v1/projects", type: :api do
       expect(json_body["current_progress"]).to eq(update_project[:current_progress])
     end
     
+    it "cannot update project which does not exist" do 
+      no_exist_project = update_project
+      no_exist_project[:id] = 1111111;
+      put "/api/v1/projects/#{no_exist_project[:id]}.json", {project: no_exist_project}, headers
+      
+      expect(last_response.status).to eq(404)
+      expect(last_response.body).to include("resource not found")
+
+    end
+    
     it "cannot update project without token" do 
       put "#{url}.json", {project: project.to_json}
       
@@ -102,6 +144,13 @@ describe "/api/v1/projects", type: :api do
       json_body = JSON.parse(last_response.body)
       expect(json_body).to have_key('name')
       expect(json_body["name"]).to eq(project.name)
+      
+      get "#{url}.json", {}, headers
+      
+      projects_json = user.projects.to_json
+      expect(last_response.status).to eq(404)
+      expect(last_response.body).to include("resource not found")
+      
     end
     
     it "cannot delete unexisted project" do 

@@ -1,6 +1,6 @@
 class Api::V1::ProjectsController < Api::V1::BaseController
   
-  before_action :set_project, :only => [:update, :destroy] 
+  before_action :set_project, :only => [:show, :update, :destroy] 
   
   def index
     respond_with(current_user.projects)
@@ -8,39 +8,34 @@ class Api::V1::ProjectsController < Api::V1::BaseController
   
   def create
     @project = current_user.projects.build(project_params)
-    respond_to do |format|
-      if @project.save
-        format.json { render json: @project.to_json,  success: true, status: :created }
-      else
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+
+    if @project.save
+      render json: @project.to_json,  success: true, status: :created
+    else
+      render json: @project.errors, status: :unprocessable_entity
     end
+
+  end
+  
+  def show
+    respond_with(@project)
   end
   
   def update
-    respond_to do |format|
-      if @project.update(project_params)     
-        # @project.generate_image("jpg")  
-        format.json { render json: @project.to_json,  success: true, status: :created }
-      else
-        format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+    if @project.update(project_params)     
+      render json: @project.to_json,  success: true, status: :created
+    else
+      render json: @project.errors, status: :unprocessable_entity
     end
   end
   
   def destroy
-    respond_to do |format|
-      if @project
-        public_path = Rails.public_path.to_s
-        path = public_path << "/progress/#{@project.name}.jpg"
-        img_path = path if File.exists? path
-        @project.destroy
-        File.delete(img_path) if File.exist? img_path if img_path
-        format.json { render json: @project.to_json, status: :ok, success: true}
-      else
-        format.json { render json: {message: "resource not found"}, status: :not_found}
-      end
-    end
+    public_path = Rails.public_path.to_s
+    path = public_path << "/progress/#{@project.name}.jpg"
+    img_path = path if File.exists? path
+    @project.destroy
+    File.delete(img_path) if File.exist? img_path if img_path
+    render json: @project.to_json, status: :ok, success: true
   end
   
   private 
@@ -49,7 +44,8 @@ class Api::V1::ProjectsController < Api::V1::BaseController
   end
   
   def set_project
-    @project = Project.find_by_id(params[:id])
+    @project = current_user.projects.find_by_id(params[:id])
+    render json: {message: "resource not found"}, status: :not_found unless @project
   end
   
 end
