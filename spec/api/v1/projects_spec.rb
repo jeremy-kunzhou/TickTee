@@ -14,7 +14,6 @@ describe "/api/v1/projects", type: :api do
       end_at: "2014-08-01", 
       expected_progress: 20,
       current_progress: 10,
-      user_id: user.id
     }
   }
   before :each do
@@ -105,8 +104,10 @@ describe "/api/v1/projects", type: :api do
   context "projects update" do 
     let(:url) { "/api/v1/projects/#{project.id}"} 
     let(:update_project) {
-      new_project[:current_progress] = 30
-      new_project
+      new_p = {
+        current_progress: 30
+      }
+      new_p
     }
     it "update project" do 
       put "#{url}.json", {project: update_project}, headers
