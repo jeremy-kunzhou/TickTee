@@ -10,23 +10,53 @@
 </p>
 
 <p>
-  <strong>Start at:</strong>
-  <%= @project.start_at %>
+  <strong>init_progress:</strong>
+  <%= @project.init_progress %>
 </p>
 
 <p>
-  <strong>End at:</strong>
-  <%= @project.end_at %>
-</p>
-
-<p>
-  <strong>Expected progress:</strong>
-  <%= @project.expected_progress %>
+  <strong>Target:</strong>
+  <%= @project.target %>
 </p>
 
 <p>
   <strong>Current progress:</strong>
   <%= @project.current_progress %>
+</p>
+
+<p>
+  <strong>Expected progress:</strong>
+  <%= @project.cal_expected_progress %>
+</p>
+
+<p>
+  <strong>Start at:</strong>
+  <%= @project.start_at.localtime %>
+</p>
+
+<p>
+  <strong>End at:</strong>
+  <%= @project.end_at.localtime %>
+</p>
+
+<p>
+  <strong>Unit:</strong>
+  <%= @project.unit %>
+</p>
+
+<p>
+  <strong>Alert:</strong>
+  <%= @project.alert_type %>
+</p>
+
+<p>
+  <strong>Is Decimal Unit:</strong>
+  <%= @project.is_decimal_unit %>
+</p>
+
+<p>
+  <strong>Is Consumed:</strong>
+  <%= @project.is_consumed %>
 </p>
 
 <p>

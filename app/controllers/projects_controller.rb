@@ -35,6 +35,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = current_user.projects.build(project_params)
+    p @project.alert_type
     respond_to do |format|
       if @project.save
         generate_img
@@ -89,7 +90,11 @@ class ProjectsController < ApplicationController
           public_path = Rails.public_path.to_s
           path = public_path << "/progress/#{@project.name}.jpg"
           @img_path = path if File.exists? path
-          diff_date = @project.generate_at - Time.now.to_date
+          if @project.generate_at
+            diff_date = @project.generate_at - Time.now.to_date
+          else
+            diff_date = 1
+          end
           if @img_path && !@project.is_updated && diff_date == 0
             File.open(@img_path, 'rb') do |f|
               send_data f.read, type: "image/jpeg", disposition: "inline"
@@ -117,7 +122,11 @@ class ProjectsController < ApplicationController
       public_path = Rails.public_path.to_s
       path = public_path << "/progress/#{@project.name}.jpg"
       @img_path = path if File.exists? path
-      diff_date = @project.generate_at - Time.now.to_date
+      if @project.generate_at
+        diff_date = @project.generate_at - Time.now.to_date
+      else
+        diff_date = 1
+      end
       unless @img_path && !@project.is_updated && diff_date == 0      
         generate_img
       end 
@@ -144,7 +153,15 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :start_at, :end_at, :expected_progress, :current_progress)
+      if params[:project][:start_at].present? and params[:project][:end_at].present?
+        start_string = "#{params[:project][:start_at]} 00:00:00"
+        end_string = "#{params[:project][:end_at]} 23:59:59" 
+        params[:project][:start_at] = Time.zone.parse(start_string).utc
+        params[:project][:end_at] = Time.zone.parse(end_string).utc
+        p "start string #{start_string} end string #{end_string}"
+        p "params start #{params[:project][:start_at]} end #{params[:project][:end_at]}"
+      end
+      params.require(:project).permit(:name, :description, :start_at, :end_at, :expected_progress, :current_progress, :target, :alert_type, :unit, :is_decimal_unit, :init_progress, :is_consumed)
     end
     
     def generate_img       

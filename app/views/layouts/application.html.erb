@@ -16,6 +16,7 @@
 		  background-color: transparent !important;
 	  }
   </style>
+	
 </head>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -76,5 +77,12 @@
   		</div>
   	</div>
   </footer>
+	<script>
+	jQuery(function() {
+		var t = jstz.determine()
+		$.cookie('timezone', t.name(), { path: '/'});
+	});
+		
+	</script>
 </body>
 </html>

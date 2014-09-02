@@ -8,7 +8,7 @@ class Api::V1::ProjectsController < Api::V1::BaseController
   
   def create
     @project = current_user.projects.build(project_params)
-
+    p @project
     if @project.save
       render json: @project.to_json,  success: true, status: :created
     else
@@ -40,7 +40,7 @@ class Api::V1::ProjectsController < Api::V1::BaseController
   
   private 
   def project_params
-    params.require(:project).permit(:name, :description, :start_at, :end_at, :expected_progress, :current_progress)
+    params.require(:project).permit(:name, :description, :updated_at, :created_at, :start_at, :end_at, :expected_progress, :current_progress, :target, :alert_type, :unit, :is_decimal_unit, :init_progress, :is_consumed)
   end
   
   def set_project

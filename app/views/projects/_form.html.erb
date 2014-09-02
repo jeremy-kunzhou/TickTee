@@ -28,12 +28,34 @@
     <%= f.text_field :end_at, {class: "form-control datepicker"} %>
   </div>
   <div class="form-group">
-    <%= f.label :expected_progress %>
-    <%= f.number_field :expected_progress, {class: "form-control"} %>
+    <%= f.label :init_progress %>
+    <%= f.number_field :init_progress, {class: "form-control"} %>
   </div>
+  <div class="form-group">
+    <%= f.label :target %>
+    <%= f.number_field :target, {class: "form-control"} %>
+  </div>
+	<%= f.hidden_field :expected_progress, value: 0 %>
   <div class="form-group">
     <%= f.label :current_progress %>
     <%= f.number_field :current_progress, {class: "form-control"} %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :unit %>
+    <%= f.text_field :unit, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :alert_type %>
+    <%= f.select :alert_type, alertType, {}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :is_decimal_unit do %>
+  		<%= f.check_box :is_decimal_unit %> Decimal Unit
+		<% end %>
+    <%= f.label :is_consumed do %>
+			<%= f.check_box :is_consumed %> Consumed
+		<% end %>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.min
+//= require jquery.cookie
 //= require turbolinks
 //= require bootstrap.min
 //= require ie-emulation-modes-warning
@@ -22,5 +23,6 @@
 //= require docs.min
 //= require list.min
 //= require zeroclipboard
+//= require jstz-1.0.4.min
 //= require_tree .
 

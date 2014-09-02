@@ -14,6 +14,13 @@ describe "/api/v1/projects", type: :api do
       end_at: "2014-08-01", 
       expected_progress: 20,
       current_progress: 10,
+      unit: "km",
+      is_decimal_unit: "false",
+      target: "200",
+      is_consumed: "false",
+      created_at: "2014-09-01",
+      alert_type: "OFF",
+      init_progress: "0"
     }
   }
   before :each do
@@ -105,7 +112,7 @@ describe "/api/v1/projects", type: :api do
     let(:url) { "/api/v1/projects/#{project.id}"} 
     let(:update_project) {
       new_p = {
-        current_progress: 30
+        current_progress: "30.0"
       }
       new_p
     }
