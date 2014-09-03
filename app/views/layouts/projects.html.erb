@@ -12,7 +12,7 @@
   				<div id="users">
   					<li style="padding: 5px"><input class="search text-center" style="width: 100%; margin: auto;" placeholder="Search" /></li>
 		  					<ul class="list nav nav-embeded-nav-list">	
-									<% current_user.projects.each do |project| %>
+									<% current_user.projects.where("sync_mode != 'D'").each do |project| %>
 										<% if project.id %>
 										<% if @project && @project.id == project.id %>
 											<li class="active">

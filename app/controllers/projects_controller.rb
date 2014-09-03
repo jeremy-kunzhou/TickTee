@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    @avail_projects = current_user.projects.where("sync_mode != 'D'")
   end
   
   def js_request?
@@ -35,7 +36,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = current_user.projects.build(project_params)
-    p @project.alert_type
+    @project.sync_mode = "I"
     respond_to do |format|
       if @project.save
         generate_img
@@ -54,6 +55,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @project.sync_mode = "U"
     respond_to do |format|
       if @project.update(project_params)     
         generate_img   
@@ -69,16 +71,27 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project.destroy
+# @project.destroy
+#    respond_to do |format|
+#      format.html {
+#        if @img_path
+#          File.delete(@img_path) if File.exist? @img_path
+#        end
+#        redirect_to user_projects_url(current_user), notice: 'Project was successfully destroyed.'
+#      }
+#      format.json { head :no_content }
+#    end
+    @project.sync_mode = "D"
+    @project.save
     respond_to do |format|
-      format.html { 
-        if @img_path
-          File.delete(@img_path) if File.exist? @img_path
-        end
-        redirect_to user_projects_url(current_user), notice: 'Project was successfully destroyed.' 
-      }
-      format.json { head :no_content }
-    end
+     format.html {
+       if @img_path
+         File.delete(@img_path) if File.exist? @img_path
+       end
+       redirect_to user_projects_url(current_user), notice: 'Project was successfully destroyed.'
+     }
+     format.json { head :no_content }
+   end
   end
   
   # GET /projects/1/generate
