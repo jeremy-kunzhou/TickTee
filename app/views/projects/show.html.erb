@@ -31,12 +31,12 @@
 
 <p>
   <strong>Start at:</strong>
-  <%= @project.start_at.localtime %>
+  <%= @project.start_at.localtime if @project.start_at%>
 </p>
 
 <p>
   <strong>End at:</strong>
-  <%= @project.end_at.localtime %>
+  <%= @project.end_at.localtime if @project.end_at %>
 </p>
 
 <p>
