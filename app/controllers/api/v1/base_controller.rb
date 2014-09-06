@@ -2,7 +2,8 @@ class Api::V1::BaseController < ActionController::Base
   respond_to :json
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :null_session, :if => Proc.new{|c| c.request.format == 'application/json'}
+  
+  protect_from_forgery with: :null_session, if: Proc.new{|c| c.request.format.json?}
 
   # new function that comes before Devise's one
   before_filter :authenticate_user_from_token!
