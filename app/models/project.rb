@@ -38,7 +38,7 @@ class Project < ActiveRecord::Base
   
   private 
   def getPercentage(real, total)
-    percentage = (real / total).ceil
+    percentage = (real.to_f / total.to_f * 100.0).ceil
     percentage = percentage > 100 ? 100 : percentage
     percentage
   end
