@@ -43,7 +43,7 @@ class Api::V1::ProjectsController < Api::V1::BaseController
   
   private 
   def project_params
-    params.require(:project).permit(:name, :description, :updated_at, :created_at, :start_at, :end_at, :expected_progress, :current_progress, :target, :alert_type, :unit, :is_decimal_unit, :init_progress, :is_consumed)
+    params.require(:project).permit(:name, :description, :updated_at, :created_at, :start_at, :end_at, :expected_progress, :current_progress, :target, :alert_type, :unit, :is_decimal_unit, :init_progress, :is_consumed, :sync_mode, :schedule)
   end
   
   def set_project

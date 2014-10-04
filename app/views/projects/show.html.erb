@@ -40,6 +40,20 @@
 </p>
 
 <p>
+	<strong>Schedule:</strong>
+	<ul class="nav nav-pills">
+		<%= schedule 1, @project.schedule, true %>
+		<%= schedule 2, @project.schedule, true %>
+	 	<%= schedule 3, @project.schedule, true %>
+		<%= schedule 4, @project.schedule, true %>
+		<%= schedule 5, @project.schedule, true %>
+		<%= schedule 6, @project.schedule, true %>
+		<%= schedule 7, @project.schedule, true %>
+			
+	</ul>
+</p>
+
+<p>
   <strong>Unit:</strong>
   <%= @project.unit %>
 </p>
@@ -112,6 +126,13 @@
 			refreshImage()
 			setInterval(function(){refreshImage()}, 300*1000)
 		}
+		
+		$("input:checkbox").bind('click', function()
+			{
+				this.removeClass("active")
+				return false
+			}
+		)
 		
 	});
 </script>

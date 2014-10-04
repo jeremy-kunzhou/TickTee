@@ -40,6 +40,19 @@
     <%= f.label :current_progress %>
     <%= f.number_field :current_progress, {class: "form-control"} %>
   </div>
+	
+	<div class="form-group">
+		<%= f.label :schedule %>
+		<div class="btn-group" data-toggle="buttons">
+		<%= schedule 1, @project.schedule,false %>
+		<%= schedule 2, @project.schedule,false %>
+	 	<%= schedule 3, @project.schedule,false %>
+		<%= schedule 4, @project.schedule,false %>
+		<%= schedule 5, @project.schedule,false %>
+		<%= schedule 6, @project.schedule,false %>
+		<%= schedule 7, @project.schedule,false %>
+		</div>
+	</div>
   
   <div class="form-group">
     <%= f.label :unit %>

@@ -171,10 +171,31 @@ class ProjectsController < ApplicationController
         end_string = "#{params[:project][:end_at]} 23:59:59" 
         params[:project][:start_at] = Time.zone.parse(start_string).utc
         params[:project][:end_at] = Time.zone.parse(end_string).utc
-        p "start string #{start_string} end string #{end_string}"
-        p "params start #{params[:project][:start_at]} end #{params[:project][:end_at]}"
       end
-      params.require(:project).permit(:name, :description, :start_at, :end_at, :expected_progress, :current_progress, :target, :alert_type, :unit, :is_decimal_unit, :init_progress, :is_consumed)
+      schedule = 0
+      if params[:Mon].present?
+        schedule += 1 if params[:Mon].eql? "on"
+      end
+      if params[:Tue].present?
+        schedule += 2 if params[:Tue].eql? "on"
+      end
+      if params[:Wed].present?
+        schedule += 4 if params[:Wed].eql? "on"
+      end
+      if params[:Thu].present?
+        schedule += 8 if params[:Thu].eql? "on"
+      end
+      if params[:Fri].present?
+        schedule += 16 if params[:Fri].eql? "on"
+      end
+      if params[:Sat].present?
+        schedule += 32 if params[:Sat].eql? "on"
+      end
+      if params[:Sun].present?
+        schedule += 64 if params[:Sun].eql? "on"
+      end
+      params[:project][:schedule] = schedule
+      params.require(:project).permit(:name, :description, :start_at, :end_at, :expected_progress, :current_progress, :target, :alert_type, :unit, :is_decimal_unit, :init_progress, :is_consumed, :schedule)
     end
     
     def generate_img       
