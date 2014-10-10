@@ -23,7 +23,7 @@ module ImageGeneration
     </body>
     </html>
     here
-    kit = IMGKit.new(html, width: 300, height: 50)
+    kit = IMGKit.new(html, width: 300, height: 60)
     kit.to_file(path)
     kit
   end
