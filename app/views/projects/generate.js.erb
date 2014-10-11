@@ -4,6 +4,10 @@ $(document).ready(function(){
 		var time = (new Date()).getTime()
 		return image_original_url+time
 	}
+	if (typeof refreshProgressInterval !== 'undefined' && refreshProgressInterval != null)
+	{
+		clearInterval(refreshProgressInterval)
+	}
 	if($('#ticktee'))
 	{
 		var refreshImage = function(){
@@ -11,7 +15,7 @@ $(document).ready(function(){
 			$('#ticktee').html(image_tag)
 		}
 		refreshImage()
-		setInterval(function(){refreshImage()}, 300*1000)
+		refreshProgressInterval = setInterval(function(){refreshImage()}, 300*1000)
 	}
 	else if($('#ticktee_img'))
 	{
@@ -19,6 +23,6 @@ $(document).ready(function(){
 			$('#ticktee_img').attr('src', updateUrl())
 		}
 		refreshImage()
-		setInterval(function(){refreshImage()}, 300*1000)
+		refreshProgressInterval = setInterval(function(){refreshImage()}, 300*1000)
 	}
 });

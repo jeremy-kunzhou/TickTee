@@ -118,13 +118,17 @@
 			var time = (new Date()).getTime()
 			return image_original_url+time
 		}
+		if (typeof refreshProgressInterval !== 'undefined' && refreshProgressInterval != null)
+		{
+			clearInterval(refreshProgressInterval)
+		}
 		if($('#ticktee_img'))
 		{
 			var refreshImage = function(){
 				$('#ticktee_img').attr('src', updateUrl())
 			}
 			refreshImage()
-			setInterval(function(){refreshImage()}, 300*1000)
+			refreshProgressInterval = setInterval(function(){refreshImage()}, 300*1000)
 		}
 		
 		$("input:checkbox").bind('click', function()
