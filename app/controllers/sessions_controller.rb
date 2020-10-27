@@ -1,6 +1,6 @@
 class SessionsController < Devise::SessionsController
     skip_before_action :verify_authenticity_token, only: [:create, :new]
-    skip_before_action :authenticate_user!, only: [:create, :new]
+    skip_before_action :authenticate_user!, only: [:create, :new], raise:false
     # skip_authorization_check only: [:create, :failure, :show_current_user, :options, :new]
     respond_to :json
 
