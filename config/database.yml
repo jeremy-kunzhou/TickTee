@@ -8,7 +8,7 @@ default: &default
   adapter: postgresql
   encoding: utf-8
   username: myapp
-  password: paddword1
+  password: password1
   pool: 5
   timeout: 5000
 

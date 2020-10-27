@@ -1,4 +1,4 @@
-class ChangeProgressToDecimal < ActiveRecord::Migration
+class ChangeProgressToDecimal < ActiveRecord::Migration[6.0]
   def up
     change_column :projects, :expected_progress, :decimal
     change_column :projects, :current_progress, :decimal

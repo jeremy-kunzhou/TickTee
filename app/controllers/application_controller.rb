@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   protect_from_forgery with: :exception
-  around_filter :set_timezone
+  around_action :set_timezone
   def after_sign_in_path_for(resource)
     user_projects_path current_user
   end
