@@ -5,9 +5,9 @@ class Api::V1::BaseController < ActionController::Base
   protect_from_forgery with: :null_session, if: Proc.new{|c| c.request.format.json?}
 
   # new function that comes before Devise's one
-  before_filter :authenticate_user_from_token!
+  before_action :authenticate_user_from_token!
   # Devise's authentication
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def after_sign_in_path_for(resource)
     user_projects_path current_user

@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!, except: [:generate]
   before_action :set_project, only: [:show, :edit, :update, :destroy, :loadjs]
-  skip_before_filter :verify_authenticity_token, if: :js_request?
+  skip_before_action :verify_authenticity_token, if: :js_request?
   # GET /projects
   # GET /projects.json
   def index
