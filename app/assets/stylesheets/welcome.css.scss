@@ -85,6 +85,21 @@
 	top: -10px;
 }
 
+.app-store-container {
+  margin: 0 auto;
+  .app-store {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      width: 200px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media (max-width: 767px) {
 	.info_graph_left_top{
 		border-right: 3px solid #eee;
